@@ -55,7 +55,7 @@ def check(ip, ports):
         if not status > 0:
             status += st
 
-    print "%s; opened %s ; cloesed %s" % (status_string[status],
+    print "%s; opened %s ; closed %s" % (status_string[status],
                                         ",".join(totals[0]),
                                         ",".join(totals[1]),)
 
