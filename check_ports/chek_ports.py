@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-""" Test for opend ports
+""" Test for opened ports
 By Nicola Senno
 
 This program is free software: you can redistribute it and/or modify
@@ -64,11 +64,11 @@ def check(ip, ports):
 
 if __name__ == "__main__":
     parser = OptionParser(
-        usage="%prog [-o <IP> -p <ports>]",
+        usage="%prog [-o <IP> -p <ports> -t <timeout>]",
         version="%prog $Revision$",
         prog="check_ports",
         description="""This program makes a check if
-        certains ports are open
+        some, given as params are open or closed
         """,
     )
     parser.add_option(
