@@ -64,11 +64,11 @@ def check(ip, ports):
 
 if __name__ == "__main__":
     parser = OptionParser(
-        usage="%prog [-o <IP> -p <ports> -t <timeout>]",
+        usage="%prog [-o <IP> -p <[PORTS]> -t <TIMEOUT>]",
         version="%prog $Revision$",
         prog="check_ports",
-        description="""This program makes a check if
-        some, given as params are open or closed
+        description="""This program makes a check if the given 
+        ports are opened or closed
         """,
     )
     parser.add_option(
@@ -106,13 +106,13 @@ if __name__ == "__main__":
         parser.error("Host or ip is missing")
 
     if not opts.ports:
-        parser.error("Ports number is missing")
+        parser.error("Port number is missing")
 
     ports = [port for port in opts.ports.split(",")
              if is_valid(port)]
 
     if len(ports) < len(opts.ports.split(",")):
-        parser.error("One of the given port is not in 1 <= port <= 65535")
+        parser.error("One of the given ports is not in 1 <= port <= 65535")
 
     setdefaulttimeout(opts.timeout)
     check(opts.hosts, ports)
