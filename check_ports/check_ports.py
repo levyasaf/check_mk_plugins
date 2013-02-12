@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from optparse import OptionParser
 from socket import *
-
+import sys
 
 def is_valid(port):
     try:
@@ -46,19 +46,18 @@ def port_test(ip, port):
 
 def check(ip, ports):
     status = 0
-    status_string = ['OK', 'CRITICAL']
+    status_string = ['OK','WARNING' 'CRITICAL']
     totals = {0: [], 1: []}
 
     for port in ports:
         st = port_test(ip, int(port))
         totals[st].append(port)
-        if not status > 0:
-            status += st
+        if st == 1 and not status > 0:
+            status = 2
 
-    print "%s; opened %s ; closed %s" % (status_string[status],
-                                        ",".join(totals[0]),
-                                        ",".join(totals[1]),)
-
+    print "%s; ports opened %s - ports closed %s" % (status_string[status],
+                                                    ",".join(totals[0]),
+                                                    ",".join(totals[1]),)
     return status
 
 
@@ -115,5 +114,6 @@ if __name__ == "__main__":
         parser.error("One of the given ports is not in 1 <= port <= 65535")
 
     setdefaulttimeout(opts.timeout)
-    check(opts.hosts, ports)
+    status = check(opts.hosts, ports)
+    sys.exit(status)
 
