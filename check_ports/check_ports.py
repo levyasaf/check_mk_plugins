@@ -46,7 +46,7 @@ def port_test(ip, port):
 
 def check(ip, ports):
     status = 0
-    status_string = ['OK','WARNING' 'CRITICAL']
+    status_string = ['OK','WARNING','CRITICAL']
     totals = {0: [], 1: []}
 
     for port in ports:
